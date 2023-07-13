@@ -26,9 +26,8 @@ router.post('/signup', async (req, res) => {
         token: uid2(32),
       });
 
-      newUser.save().then(newDoc => {
-        res.json({ result: true, token: newDoc.token });
-      });
+      const saveUser = await newUser.save();
+      res.json({ result: true, token: saveUser.token });
     } else {
       // User already exists in database
       res.json({ result: false, error: 'User already exists' });
