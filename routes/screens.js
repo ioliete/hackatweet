@@ -7,20 +7,19 @@ const { checkBody } = require('../modules/checkBody');
 
 
 router.get('/alltweets', async (req, res) => {
-  if (!checkBody(req.params, ['token'])) {
+  if (!checkBody(req.query, ['token'])) {
     res.json({ result: false, error: 'User not found' });
     return;
   }
 
   try {
-    const data = await Tweet.find().sort({ date: -1 });
-    await data.populate('user');
+    const data = await Tweet.find().sort({ date: -1 }).populate('user');
 
     if (data.length > 0) {
       const tweets = data.map(tweet => ({
         id: tweet._id,
         username: tweet.user.username,
-        user: tweet.user.firstname,
+        firstname: tweet.user.firstname,
         date: tweet.date,
         message: tweet.tweet,
       }));
