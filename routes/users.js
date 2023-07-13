@@ -33,7 +33,7 @@ router.post('/signup', async (req, res) => {
       res.json({ result: false, error: 'User already exists' });
     }
   } catch (error) {
-    console.error(error);
+    res.json({ result: false, error });
   }
 });
 
@@ -56,7 +56,7 @@ router.post('/signin', async (req, res) => {
       res.json({ result: false, error: 'User not found or wrong password' });
     }
   } catch (error) {
-    console.error(error);
+    res.json({ result: false, error });
   }
 });
 
@@ -75,7 +75,7 @@ router.post('/logout', async (req, res) => {
       res.json({ result: false, error: 'Wrong token' });
     }
   } catch (error) {
-    console.error(error);
+    res.json({ result: false, error });
   }
 });
 
