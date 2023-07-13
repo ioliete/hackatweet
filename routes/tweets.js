@@ -13,7 +13,6 @@ router.post("/addtweet", async (req, res) => {
   }
 
   const data = await User.findOne({ token: req.body.token });
-  //console.log(data);
   if (data) {
     let newTweet = new Tweet({
       tweet: req.body.tweet,

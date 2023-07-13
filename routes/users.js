@@ -67,7 +67,7 @@ router.post('/logout', async (req, res) => {
     return;
   }
 
-  const data = await User.updateOne({ token: req.body.token });
+  const data = await User.updateOne({ token: req.body.token }, { token: '' });
   try {
     if (data.modifiedCount === 1) {
       res.json({ result: true });
