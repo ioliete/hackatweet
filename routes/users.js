@@ -28,7 +28,7 @@ router.post('/signup', async (req, res) => {
       });
 
       const saveUser = await newUser.save();
-      res.json({ result: true, token: saveUser.token });
+      res.json({ result: true, firstname: saveUser.firstname, username: saveUser.username, token: saveUser.token });
     } else {
       // User already exists in database
       res.json({ result: false, error: 'User already exists' });
@@ -52,7 +52,7 @@ router.post('/signin', async (req, res) => {
         data.token = uid2(32);
         await User.updateOne({ username: req.body.username }, { token: data.token });
       }
-      res.json({ result: true, token: data.token });
+      res.json({ result: true, firstname: data.firstname, username: data.username,  token: data.token });
     } else {
       res.json({ result: false, error: 'User not found or wrong password' });
     }
